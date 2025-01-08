@@ -1,0 +1,10 @@
+
+<          Chat         >
+--------------------------
+
+User 1 has joined the chat!
+User 1 has left the chat.
+User 2 has joined the chat!
+User 2 has left the chat.
+User 3 has joined the chat!
+User 3 has left the chat.
