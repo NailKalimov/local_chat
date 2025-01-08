@@ -39,15 +39,72 @@ def on_closing(event=None):
 # будут отображаться сообщения, поле для ввода и кнопка:
 root = tk.Tk()
 root.title('Chat')
-root.geometry('450x400')
+root.geometry('450x600')
 # root.resizable(False, False)
 
+
+server_ip_var = tk.StringVar()
+server_port_var = tk.StringVar()
+name_var = tk.StringVar()
+
+
+# defining a function that will
+# get the name and password and
+# print them on the screen
+def submit():
+    servip = server_ip_var.get()
+    servport = server_port_var.get()
+    name = name_var.get()
+
+    print("The name is : " + name)
+    print("The ip is : " + servip)
+    print("The port is : " + servport)
+
+    server_ip_var.set("")
+    server_port_var.set("")
+    name_var.set("")
+
+
+# creating a label for
+# name using widget Label
+name_label = tk.Label(root, text='Username', font=('calibre', 10, 'bold'))
+# creating a entry for input
+# name using widget Entry
+name_entry = tk.Entry(root, textvariable=name_var, font=('calibre', 10, 'normal'))
+
+# creating a label for password
+ip_label = tk.Label(root, text='Server_ip', font=('calibre', 10, 'bold'))
+# creating a entry for password
+ip_entry = tk.Entry(root, textvariable=server_ip_var, font=('calibre', 10, 'normal'))
+
+port_label = tk.Label(root, text='Server_port', font=('calibre', 10, 'bold'))
+# creating a entry for password
+port_entry = tk.Entry(root, textvariable=server_port_var, font=('calibre', 10, 'normal'))
+
+# creating a button using the widget
+# Button that will call the submit function
+sub_btn = tk.Button(root, text='Submit', command=submit)
+
+# placing the label and entry in
+# the required position using grid
+# method
+name_label.pack()
+name_entry.pack()
+ip_label.pack()
+ip_entry.pack()
+port_label.pack()
+port_entry.pack()
+sub_btn.pack()
+
+root.option_add('*Font', '{Calibri} 11')
+root.option_add('*Background', 'gray')
 
 messages_frame = tk.Frame(root)
 my_msg = tk.StringVar()
 scrollbar = tk.Scrollbar(messages_frame)
 
-msg_list = tk.Listbox(messages_frame, height=20, width=60, yscrollcommand=scrollbar.set)
+# https://tkdocs.com/shipman/listbox.html
+msg_list = tk.Listbox(messages_frame, height=20, width=60, yscrollcommand=scrollbar.set, foreground='blue')
 scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 msg_list.pack(side=tk.LEFT, fill=tk.BOTH)
 messages_frame.pack()
@@ -59,8 +116,8 @@ messages_frame.pack()
 entry_field = tk.Entry(root, width=62, textvariable=my_msg)
 entry_field.bind("<Return>", send)
 entry_field.pack()
-
-send_button = tk.Button(root, text="Send", width=15, command=send)
+# https://www.geeksforgeeks.org/python-creating-a-button-in-tkinter/
+send_button = tk.Button(root, text="Send", width=15, command=send, bd=5, activebackground='red')
 send_button.pack()
 
 # Если клиент решит закрыть окно, то появится диалоговое окно с просьбой подтвердить выход из программы on_closing():
